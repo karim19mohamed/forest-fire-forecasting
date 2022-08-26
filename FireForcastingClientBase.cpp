@@ -12,7 +12,7 @@
 using namespace std;
 typedef long long ll;
 
-FireForcastingClientBase::FireForcastingClientBase() {
+FireForcastingClientBase::FireForcastingClientBase(bool test_flag) {
 	/*
 	 * The constructor will be responsible for:
 	 * 1- reset all the parameters
@@ -21,6 +21,7 @@ FireForcastingClientBase::FireForcastingClientBase() {
 	temp_readings = vector<float>(5, 0.0);
 	temp_accumlation = 0.0;
 	temp_average = 0.0;
+	this->test_flag = test_flag;
 	client();
 }
 
@@ -30,6 +31,21 @@ void FireForcastingClientBase::readTemperature() {
 	 * 1- read the data from the sensor or from the unit test or from sensor simulation
 	 * 2- it reads and store every 5 readings
 	 */
+	if (test_flag) {
+		srand(time(NULL));
+		printf("Temperature Values:");
+		fflush(stdout);
+		for (int i = 0; i < 5; ++i) {
+			temp_readings[i] = -20 + static_cast<float>(rand()) * static_cast<float>(40 + 20) / RAND_MAX;
+			; // range = [-20,40]
+			printf(" %f", temp_readings[i]);
+			fflush(stdout);
+			sleep(1);
+		}
+		puts("");
+	}else{
+		// Implementation of reading from actual sensor
+	}
 }
 void FireForcastingClientBase::calculateAccumlation() {
 	/*

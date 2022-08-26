@@ -6,6 +6,6 @@ typedef long long ll;
 
 int main() {
 	// The main function to run the Client class
-	FireForcastingClientBase client;
+	FireForcastingClientBase client(true);
 	return 0;
 }

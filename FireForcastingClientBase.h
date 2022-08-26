@@ -17,11 +17,12 @@ class FireForcastingClientBase {
 		vector<float> temp_readings;
 		float temp_average;
 		float temp_accumlation;
+		bool test_flag;
 		void readTemperature();
 		void calculateAccumlation();
 		void calculateAverage();
 	public:
-		FireForcastingClientBase();
+		FireForcastingClientBase(bool test_flag);
 		void client();
 };
 
