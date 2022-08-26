@@ -36,12 +36,19 @@ void FireForcastingClientBase::calculateAccumlation() {
 	 * The calculateAccumlation function will be responsible for:
 	 * 1- calculate Accumlation of the temperature every 5 seconds
 	 */
+	temp_accumlation = 0.0;
+	for (auto &temp_reading : temp_readings)
+		temp_accumlation += temp_reading;
 }
 void FireForcastingClientBase::calculateAverage() {
 	/*
 	 * The calculateAverage function will be responsible for:
 	 * 1- calculate Average of the temperature every 5 seconds
 	 */
+	temp_average = 0.0;
+	for (auto &temp_reading : temp_readings)
+		temp_average += temp_reading;
+	temp_average /= 5.0;
 }
 
 void FireForcastingClientBase::client() {
