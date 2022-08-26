@@ -60,4 +60,10 @@ void FireForcastingClientBase::client() {
 	 * 4- call the calculateAverage function
 	 * 5- print the Accumlation and Average to the terminal
 	 */
+	while (1) {
+		readTemperature();
+		calculateAccumlation();
+		calculateAverage();
+		printf("Temperute: Accumlation = %f , Average = %f\n", temp_accumlation, temp_average);
+	}
 }
