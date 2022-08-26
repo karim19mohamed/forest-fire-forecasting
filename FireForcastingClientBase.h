@@ -22,7 +22,6 @@ class FireForcastingClientBase {
 		void calculateAverage();
 	public:
 		FireForcastingClientBase();
-		virtual ~FireForcastingClientBase();
 		void client();
 };
 

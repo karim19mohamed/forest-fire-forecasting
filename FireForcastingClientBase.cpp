@@ -18,13 +18,10 @@ FireForcastingClientBase::FireForcastingClientBase() {
 	 * 1- reset all the parameters
 	 * 2- call the client function to be automated
 	 */
-}
-
-FireForcastingClientBase::~FireForcastingClientBase() {
-	/*
-	 * The destructor will be responsible for:
-	 * 1- unref all the dynamic memeory if it is used
-	 */
+	temp_readings = vector<float>(5, 0.0);
+	temp_accumlation = 0.0;
+	temp_average = 0.0;
+	client();
 }
 
 void FireForcastingClientBase::readTemperature() {
