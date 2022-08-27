@@ -93,7 +93,12 @@ void FireForcastingClientBase::calculateAverage() {
 void FireForcastingClientBase::RunningSystem(){
 	while (true) {
 		readTemperature();
-		client();
+		while (true) {
+			if (average_updated && accumlation_updated) {
+				client();
+				break;
+			}
+		}
 	}
 }
 
@@ -103,11 +108,6 @@ void FireForcastingClientBase::client() {
 	 * 1- run forever as long as the code runs to make the code automatic
 	 * 2- call the readTemperature function
 	 * 3- print the Accumlation and Average to the terminal
-	 */
-	while (true) {
-		if (average_updated && accumlation_updated) {
-			printf("Temperute: Accumlation = %f , Average = %f\n", temp_accumlation, temp_average);
-			break;
-		}
-	}
+	 */	
+	printf("Temperute: Accumlation = %f , Average = %f\n", temp_accumlation, temp_average);
 }
