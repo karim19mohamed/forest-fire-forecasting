@@ -8,7 +8,7 @@
 #ifndef FIREFORCASTINGCLIENTTERMINALOUTPUT_H_
 #define FIREFORCASTINGCLIENTTERMINALOUTPUT_H_
 
-#include <bits/stdc++.h>
+#include <iostream>
 #include "FireForcastingClientBase.h"
 
 using namespace std;

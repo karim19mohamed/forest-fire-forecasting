@@ -8,7 +8,6 @@
 #ifndef FIREFORCASTINGCLIENTSOCKETOUTPUT_H_
 #define FIREFORCASTINGCLIENTSOCKETOUTPUT_H_
 
-#include <bits/stdc++.h>
 #include "FireForcastingClientBase.h"
 #include <netinet/in.h>
 #include <stdio.h>

@@ -7,7 +7,10 @@
 
 #ifndef FIREFORCASTINGCLIENTBASE_H_
 #define FIREFORCASTINGCLIENTBASE_H_
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <thread>
+#include <unistd.h>
 
 using namespace std;
 typedef long long ll;

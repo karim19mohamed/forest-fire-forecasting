@@ -6,13 +6,11 @@
  */
 
 #include "FireForcastingClientBase.h"
-#include <bits/stdc++.h>
-#include <unistd.h>
 
 using namespace std;
 typedef long long ll;
 
-voidFireForcastingClientBase::InitializeSystem(bool test_flag) {
+void FireForcastingClientBase::InitializeSystem(bool test_flag) {
 	temp_readings = vector<float>(5, 0.0);
 	temp_accumlation = 0.0;
 	temp_average = 0.0;
