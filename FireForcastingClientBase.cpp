@@ -12,7 +12,7 @@
 using namespace std;
 typedef long long ll;
 
-FireForcastingClientBase::FireForcastingClientBase(bool test_flag) {
+void FireForcastingClientBase::InitializeSystem(bool test_flag) {
 	/*
 	 * The constructor will be responsible for:
 	 * 1- reset all the parameters
@@ -91,6 +91,12 @@ void FireForcastingClientBase::calculateAverage() {
 }
 
 void FireForcastingClientBase::RunningSystem(){
+	/*
+	 * The RunningSystem function will be responsible for:
+	 * 1- run forever as long as the code runs to make the code automatic
+	 * 2- call the readTemperature function
+	 * 3- call the client function
+	 */	
 	while (true) {
 		readTemperature();
 		while (true) {
@@ -100,14 +106,4 @@ void FireForcastingClientBase::RunningSystem(){
 			}
 		}
 	}
-}
-
-void FireForcastingClientBase::client() {
-	/*
-	 * The client function will be responsible for:
-	 * 1- run forever as long as the code runs to make the code automatic
-	 * 2- call the readTemperature function
-	 * 3- print the Accumlation and Average to the terminal
-	 */	
-	printf("Temperute: Accumlation = %f , Average = %f\n", temp_accumlation, temp_average);
 }

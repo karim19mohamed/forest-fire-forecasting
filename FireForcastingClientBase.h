@@ -13,23 +13,23 @@ using namespace std;
 typedef long long ll;
 
 class FireForcastingClientBase {
+	protected:
+		float temp_average;
+		float temp_accumlation;
+		
 	private:
 		vector<float> temp_readings;
-
-		float temp_average;
 		bool average_updated;
-
-		float temp_accumlation;
 		bool accumlation_updated;
-		
 		bool test_flag;
 		void readTemperature();
 		void calculateAccumlation();
 		void calculateAverage();
 		void RunningSystem();
+		
 	public:
-		FireForcastingClientBase(bool test_flag);
-		void client();
+		void InitializeSystem(bool test_flag);
+		virtual void client() = 0;
 };
 
 #endif /* FIREFORCASTINGCLIENTBASE_H_ */
