@@ -7,7 +7,8 @@ The code is an automated code that read data from temperature sensor every 1 sec
 To execute the main code
 
 ```
-g++ -pthread main.cpp FireForcastingClientBase.cpp FireForcastingClientTerminalOutput.cpp FireForcastingClientSocketOutput.cpp
+g++ -pthread main.cpp FireForcastingClientBase.cpp FireForcastingClientTerminalOutput.cpp FireForcastingClientSocketOutput.cpp -o main.out
+./main.out
 ```
 If the socket code will be used, the SocketClient must be executed
 ```
