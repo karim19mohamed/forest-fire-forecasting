@@ -15,8 +15,13 @@ typedef long long ll;
 class FireForcastingClientBase {
 	private:
 		vector<float> temp_readings;
+
 		float temp_average;
+		bool average_updated;
+
 		float temp_accumlation;
+		bool accumlation_updated;
+		
 		bool test_flag;
 		void readTemperature();
 		void calculateAccumlation();

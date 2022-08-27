@@ -22,7 +22,14 @@ FireForcastingClientBase::FireForcastingClientBase(bool test_flag) {
 	temp_accumlation = 0.0;
 	temp_average = 0.0;
 	this->test_flag = test_flag;
-	client();
+	average_updated = true;
+	accumlation_updated = true;
+	thread client_thread(&FireForcastingClientBase::client, this);
+	thread accumlation_thread(&FireForcastingClientBase::calculateAccumlation, this);
+	thread average_thread(&FireForcastingClientBase::calculateAverage, this);
+	accumlation_thread.join();
+	average_thread.join();
+	client_thread.join();
 }
 
 void FireForcastingClientBase::readTemperature() {
@@ -46,25 +53,41 @@ void FireForcastingClientBase::readTemperature() {
 	}else{
 		// Implementation of reading from actual sensor
 	}
+	average_updated = false;
+	accumlation_updated = false;
 }
+
 void FireForcastingClientBase::calculateAccumlation() {
 	/*
 	 * The calculateAccumlation function will be responsible for:
 	 * 1- calculate Accumlation of the temperature every 5 seconds
 	 */
-	temp_accumlation = 0.0;
-	for (auto &temp_reading : temp_readings)
-		temp_accumlation += temp_reading;
+	while (true) {
+		if (!accumlation_updated) {
+			float num = 0.0;
+			for (auto &temp_reading : temp_readings)
+				num += temp_reading;
+			temp_accumlation = num;
+			accumlation_updated = true;
+		}
+	}
 }
+
 void FireForcastingClientBase::calculateAverage() {
 	/*
 	 * The calculateAverage function will be responsible for:
 	 * 1- calculate Average of the temperature every 5 seconds
 	 */
-	temp_average = 0.0;
-	for (auto &temp_reading : temp_readings)
-		temp_average += temp_reading;
-	temp_average /= 5.0;
+	while (true) {
+		if (!average_updated) {
+			float num = 0.0;
+			for (auto &temp_reading : temp_readings)
+				num += temp_reading;
+			num /= 5.0;
+			temp_average = num;
+			average_updated = true;
+		}
+	}
 }
 
 void FireForcastingClientBase::client() {
@@ -72,14 +95,15 @@ void FireForcastingClientBase::client() {
 	 * The client function will be responsible for:
 	 * 1- run forever as long as the code runs to make the code automatic
 	 * 2- call the readTemperature function
-	 * 3- call the calculateAccumlation function
-	 * 4- call the calculateAverage function
-	 * 5- print the Accumlation and Average to the terminal
+	 * 3- print the Accumlation and Average to the terminal
 	 */
 	while (1) {
 		readTemperature();
-		calculateAccumlation();
-		calculateAverage();
-		printf("Temperute: Accumlation = %f , Average = %f\n", temp_accumlation, temp_average);
+		while (true) {
+			if (average_updated && accumlation_updated) {
+				printf("Temperute: Accumlation = %f , Average = %f\n", temp_accumlation, temp_average);
+				break;
+			}
+		}
 	}
 }
