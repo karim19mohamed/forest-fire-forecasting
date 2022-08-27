@@ -24,12 +24,12 @@ FireForcastingClientBase::FireForcastingClientBase(bool test_flag) {
 	this->test_flag = test_flag;
 	average_updated = true;
 	accumlation_updated = true;
-	thread client_thread(&FireForcastingClientBase::client, this);
+	thread RunningSystem_thread(&FireForcastingClientBase::RunningSystem, this);
 	thread accumlation_thread(&FireForcastingClientBase::calculateAccumlation, this);
 	thread average_thread(&FireForcastingClientBase::calculateAverage, this);
 	accumlation_thread.join();
 	average_thread.join();
-	client_thread.join();
+	RunningSystem_thread.join();
 }
 
 void FireForcastingClientBase::readTemperature() {
@@ -90,6 +90,13 @@ void FireForcastingClientBase::calculateAverage() {
 	}
 }
 
+void FireForcastingClientBase::RunningSystem(){
+	while (true) {
+		readTemperature();
+		client();
+	}
+}
+
 void FireForcastingClientBase::client() {
 	/*
 	 * The client function will be responsible for:
@@ -97,13 +104,10 @@ void FireForcastingClientBase::client() {
 	 * 2- call the readTemperature function
 	 * 3- print the Accumlation and Average to the terminal
 	 */
-	while (1) {
-		readTemperature();
-		while (true) {
-			if (average_updated && accumlation_updated) {
-				printf("Temperute: Accumlation = %f , Average = %f\n", temp_accumlation, temp_average);
-				break;
-			}
+	while (true) {
+		if (average_updated && accumlation_updated) {
+			printf("Temperute: Accumlation = %f , Average = %f\n", temp_accumlation, temp_average);
+			break;
 		}
 	}
 }

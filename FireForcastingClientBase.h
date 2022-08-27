@@ -26,6 +26,7 @@ class FireForcastingClientBase {
 		void readTemperature();
 		void calculateAccumlation();
 		void calculateAverage();
+		void RunningSystem();
 	public:
 		FireForcastingClientBase(bool test_flag);
 		void client();
