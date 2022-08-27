@@ -23,14 +23,23 @@ typedef long long ll;
 
 class FireForcastingClientSocketOutput : public FireForcastingClientBase {
 	private:
+		// Socket parameters
 		int server_fd, new_socket;
     	struct sockaddr_in address;
 		int opt;
     	int addrlen;
+
+		// It initializes the socket connection 
 		void InitializeSocket();
+
 	public:
+		// the constructor runs the InitializeSocket function
 		FireForcastingClientSocketOutput(bool test_flag);
+
+		// Close the socket after the connection ends
 		~FireForcastingClientSocketOutput();
+
+		// send the average and the accumulation results through the socket 
 		void client();
 };
 
